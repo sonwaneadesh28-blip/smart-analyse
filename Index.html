@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART ANALYSE</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #202938;
+}
+
+header {
+  background: #101b35;
+  color: white;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+header button {
+  padding: 10px 18px;
+  background: #3478f6;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+}
+
+.layout {
+  display: flex;
+  min-height: 90vh;
+}
+
+.sidebar {
+  width: 230px;
+  background: white;
+  padding: 25px 15px;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar h3 {
+  margin: 10px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  color: #39445a;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #e9f0ff;
+  color: #2465d5;
+}
+
+main {
+  flex: 1;
+  padding: 30px;
+  min-width: 0;
+}
+
+.welcome {
+  margin-bottom: 25px;
+}
+
+.welcome h1 {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #0000000d;
+}
+
+.card h2 {
+  color: #3478f6;
+  margin-bottom: 8px;
+}
+
+.section {
+  background: white;
+  padding: 23px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+
+.lesson {
+  border: 1px solid #e1e5ed;
+  padding: 17px;
+  margin-top: 14px;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.lesson button {
+  background: #3478f6;
+  color: white;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.progress {
+  height: 9px;
+  background: #e7eaf0;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.progress div {
+  height: 100%;
+  width: 35%;
+  background: #3478f6;
+  border-radius: 10px;
+}
+
+#lessonContent {
+  display: none;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+#lessonContent button {
+  padding: 10px 18px;
+  background: #3478f6;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+
+@media(max-width: 700px) {
+  .layout {
+    display: block;
+  }
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    padding: 8px;
+  }
+  .sidebar h3 {
+    display: none;
+  }
+  .sidebar a {
+    white-space: nowrap;
+    padding: 12px;
+  }
+  main {
+    padding: 16px;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .lesson {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SMART ANALYSE</div>
+  <button onclick="showHome()">Dashboard</button>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <h3>MENU</h3>
+  <a class="active" onclick="showHome()">🏠 Dashboard</a>
+  <a onclick="showLessons()">📚 My Courses</a>
+  <a onclick="showLessons()">🎓 Lessons</a>
+  <a onclick="showProgress()">📊 My Progress</a>
+  <a onclick="showAbout()">ℹ️ About</a>
+</aside>
+
+<main>
+
+<div class="welcome">
+  <h1>Welcome to SMART ANALYSE 👋</h1>
+  <p>Learn. Practice. Improve.</p>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <h2>03</h2>
+    <p>Available Courses</p>
+  </div>
+  <div class="card">
+    <h2>12</h2>
+    <p>Learning Lessons</p>
+  </div>
+  <div class="card">
+    <h2>35%</h2>
+    <p>Course Progress</p>
+  </div>
+</div>
+
+<div class="section" id="homeSection">
+  <h2>Continue Learning</h2>
+  <p style="margin-top:10px">Your learning journey starts here.</p>
+
+  <div class="progress">
+    <div></div>
+  </div>
+
+  <h3 style="margin-top:25px">Available Courses</h3>
+
+  <div class="lesson">
+    <div>
+      <h3>Technical Analysis</h3>
+      <p>Learn chart basics</p>
+    </div>
+    <button onclick="openLesson('Technical Analysis')">Start</button>
+  </div>
+
+  <div class="lesson">
+    <div>
+      <h3>Price Action</h3>
+      <p>Learn market structure</p>
+    </div>
+    <button onclick="openLesson('Price Action')">Start</button>
+  </div>
+
+  <div class="lesson">
+    <div>
+      <h3>Order Blocks</h3>
+      <p>Learn trading concepts</p>
+    </div>
+    <button onclick="openLesson('Order Blocks')">Start</button>
+  </div>
+</div>
+
+<div id="lessonContent">
+  <h2 id="lessonTitle">Lesson</h2>
+  <p id="lessonText"></p>
+  <button onclick="showHome()">Back to Dashboard</button>
+</div>
+
+</main>
+</div>
+
+<footer>
+  SMART ANALYSE © 2026 | Learning Platform
+</footer>
+
+<script>
+function showHome() {
+  document.getElementById("homeSection").style.display = "block";
+  document.getElementById("lessonContent").style.display = "none";
+}
+
+function showLessons() {
+  showHome();
+  document.getElementById("homeSection").scrollIntoView();
+}
+
+function showProgress() {
+  alert("Your learning progress: 35%");
+}
+
+function showAbout() {
+  alert("SMART ANALYSE - Educational Learning Platform");
+}
+
+function openLesson(name) {
+  document.getElementById("homeSection").style.display = "none";
+  document.getElementById("lessonContent").style.display = "block";
+  document.getElementById("lessonTitle").innerText = name;
+  document.getElementById("lessonText").innerText =
+    "Welcome to " + name + ". This course will help you understand the basic concepts through educational lessons and practice.";
+}
+</script>
+
+</body>
+</html>
