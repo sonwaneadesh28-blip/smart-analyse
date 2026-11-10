@@ -1,321 +1,167 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SMART ANALYSE</title>
-
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  color: #202938;
-}
-
-header {
-  background: #101b35;
-  color: white;
-  padding: 18px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 23px;
-  font-weight: bold;
-}
-
-header button {
-  padding: 10px 18px;
-  background: #3478f6;
-  color: white;
-  border: 0;
-  border-radius: 7px;
-}
-
-.layout {
-  display: flex;
-  min-height: 90vh;
-}
-
-.sidebar {
-  width: 230px;
-  background: white;
-  padding: 25px 15px;
-  border-right: 1px solid #ddd;
-}
-
-.sidebar h3 {
-  margin: 10px;
-}
-
-.sidebar a {
-  display: block;
-  padding: 15px;
-  color: #39445a;
-  text-decoration: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.sidebar a:hover,
-.sidebar a.active {
-  background: #e9f0ff;
-  color: #2465d5;
-}
-
-main {
-  flex: 1;
-  padding: 30px;
-  min-width: 0;
-}
-
-.welcome {
-  margin-bottom: 25px;
-}
-
-.welcome h1 {
-  font-size: 27px;
-  margin-bottom: 8px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 30px;
-}
-
-.card {
-  background: white;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px #0000000d;
-}
-
-.card h2 {
-  color: #3478f6;
-  margin-bottom: 8px;
-}
-
-.section {
-  background: white;
-  padding: 23px;
-  border-radius: 12px;
-  margin-bottom: 22px;
-}
-
-.lesson {
-  border: 1px solid #e1e5ed;
-  padding: 17px;
-  margin-top: 14px;
-  border-radius: 9px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.lesson button {
-  background: #3478f6;
-  color: white;
-  border: 0;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.progress {
-  height: 9px;
-  background: #e7eaf0;
-  border-radius: 10px;
-  margin-top: 15px;
-}
-
-.progress div {
-  height: 100%;
-  width: 35%;
-  background: #3478f6;
-  border-radius: 10px;
-}
-
-#lessonContent {
-  display: none;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  margin-top: 20px;
-  line-height: 1.8;
-}
-
-#lessonContent button {
-  padding: 10px 18px;
-  background: #3478f6;
-  color: white;
-  border: 0;
-  border-radius: 6px;
-  margin-top: 15px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #777;
-}
-
-@media(max-width: 700px) {
-  .layout {
-    display: block;
-  }
-  .sidebar {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    padding: 8px;
-  }
-  .sidebar h3 {
-    display: none;
-  }
-  .sidebar a {
-    white-space: nowrap;
-    padding: 12px;
-  }
-  main {
-    padding: 16px;
-  }
-  .cards {
-    grid-template-columns: 1fr;
-  }
-  .lesson {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#0b1220;color:white;font-family:Arial}
+header{background:#111c30;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;color:#38bdf8}
+button{padding:12px 18px;border:0;border-radius:7px;background:#0284c7;color:white;cursor:pointer;margin:4px}
+nav{text-align:center;padding:12px;background:#17243a}
+nav button{background:#24344d}
+section{padding:20px}
+.hero{text-align:center;padding:45px 15px}
+.hero h1{font-size:34px}
+.card{background:#17243a;border:1px solid #30435e;border-radius:12px;padding:20px;margin:12px 0}
+.card h3{color:#38bdf8}
+input,select{width:100%;padding:13px;margin:8px 0;border-radius:7px;border:1px solid #52647d;background:#101b30;color:white}
+.hidden{display:none}
+.chart{height:180px;display:flex;align-items:end;gap:8px;padding:15px}
+.bar{flex:1;background:#22c55e;border-radius:4px 4px 0 0}
+footer{text-align:center;padding:25px;color:#9caec5}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">SMART ANALYSE</div>
-  <button onclick="showHome()">Dashboard</button>
+<div class="logo">SMART ANALYSE</div>
+<button onclick="changeLang()" id="lang">मराठी</button>
 </header>
 
-<div class="layout">
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('learn')">Learn</button>
+<button onclick="show('chart')">Chart</button>
+<button onclick="show('login')">Login</button>
+<button onclick="show('admin')">Admin</button>
+</nav>
 
-<aside class="sidebar">
-  <h3>MENU</h3>
-  <a class="active" onclick="showHome()">🏠 Dashboard</a>
-  <a onclick="showLessons()">📚 My Courses</a>
-  <a onclick="showLessons()">🎓 Lessons</a>
-  <a onclick="showProgress()">📊 My Progress</a>
-  <a onclick="showAbout()">ℹ️ About</a>
-</aside>
-
-<main>
-
-<div class="welcome">
-  <h1>Welcome to SMART ANALYSE 👋</h1>
-  <p>Learn. Practice. Improve.</p>
+<section id="home">
+<div class="hero">
+<h1>SMART ANALYSE</h1>
+<p>Learn Trading • Market Structure • Order Blocks</p>
+<button onclick="show('learn')">Start Learning</button>
 </div>
-
-<div class="cards">
-  <div class="card">
-    <h2>03</h2>
-    <p>Available Courses</p>
-  </div>
-  <div class="card">
-    <h2>12</h2>
-    <p>Learning Lessons</p>
-  </div>
-  <div class="card">
-    <h2>35%</h2>
-    <p>Course Progress</p>
-  </div>
+<div class="card">
+<h3>Welcome to Smart Analyse</h3>
+<p>Learn market concepts with educational tools and examples.</p>
 </div>
-
-<div class="section" id="homeSection">
-  <h2>Continue Learning</h2>
-  <p style="margin-top:10px">Your learning journey starts here.</p>
-
-  <div class="progress">
-    <div></div>
-  </div>
-
-  <h3 style="margin-top:25px">Available Courses</h3>
-
-  <div class="lesson">
-    <div>
-      <h3>Technical Analysis</h3>
-      <p>Learn chart basics</p>
-    </div>
-    <button onclick="openLesson('Technical Analysis')">Start</button>
-  </div>
-
-  <div class="lesson">
-    <div>
-      <h3>Price Action</h3>
-      <p>Learn market structure</p>
-    </div>
-    <button onclick="openLesson('Price Action')">Start</button>
-  </div>
-
-  <div class="lesson">
-    <div>
-      <h3>Order Blocks</h3>
-      <p>Learn trading concepts</p>
-    </div>
-    <button onclick="openLesson('Order Blocks')">Start</button>
-  </div>
+<div class="card">
+<h3>Market Structure</h3>
+<p>Understand trends, liquidity and price action.</p>
 </div>
-
-<div id="lessonContent">
-  <h2 id="lessonTitle">Lesson</h2>
-  <p id="lessonText"></p>
-  <button onclick="showHome()">Back to Dashboard</button>
+<div class="card">
+<h3>Order Block</h3>
+<p>Study bullish and bearish order block concepts.</p>
 </div>
+</section>
 
-</main>
+<section id="learn" class="hidden">
+<h2>Learning Centre</h2>
+<div class="card">
+<h3>01. Order Blocks</h3>
+<p>Learn how order blocks are studied on price charts.</p>
 </div>
+<div class="card">
+<h3>02. Liquidity</h3>
+<p>Understand liquidity concepts.</p>
+</div>
+<div class="card">
+<h3>03. Market Structure</h3>
+<p>Learn higher highs, lower lows and trends.</p>
+</div>
+<div class="card">
+<h3>04. Candlestick</h3>
+<p>Learn basic candlestick patterns.</p>
+</div>
+</section>
+
+<section id="chart" class="hidden">
+<h2>Trading Chart Demo</h2>
+<div class="card">
+<p>Educational sample chart</p>
+<div class="chart">
+<div class="bar" style="height:35%"></div>
+<div class="bar" style="height:55%"></div>
+<div class="bar" style="height:42%"></div>
+<div class="bar" style="height:75%"></div>
+<div class="bar" style="height:60%"></div>
+<div class="bar" style="height:90%"></div>
+<div class="bar" style="height:70%"></div>
+</div>
+<p>Sample data only. Not live market prices.</p>
+</div>
+</section>
+
+<section id="login" class="hidden">
+<h2>User Login / Register</h2>
+<div class="card">
+<input id="username" placeholder="Enter username">
+<input id="password" type="password" placeholder="Enter password">
+<button onclick="login()">Login Demo</button>
+<button onclick="register()">Register Demo</button>
+<p id="message"></p>
+</div>
+</section>
+
+<section id="dashboard" class="hidden">
+<h2>User Dashboard</h2>
+<div class="card">
+<h3>Welcome User!</h3>
+<p>Your learning dashboard is ready.</p>
+<button onclick="show('learn')">Continue Learning</button>
+</div>
+</section>
+
+<section id="admin" class="hidden">
+<h2>Admin Panel Preview</h2>
+<div class="card">
+<h3>Website Management</h3>
+<p>Manage courses, learning modules and website content.</p>
+<p>Backend connection required for real admin controls.</p>
+</div>
+</section>
 
 <footer>
-  SMART ANALYSE © 2026 | Learning Platform
+SMART ANALYSE © 2026
+<p>Educational platform</p>
 </footer>
 
 <script>
-function showHome() {
-  document.getElementById("homeSection").style.display = "block";
-  document.getElementById("lessonContent").style.display = "none";
+let marathi=false;
+
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
 }
 
-function showLessons() {
-  showHome();
-  document.getElementById("homeSection").scrollIntoView();
+function login(){
+let u=document.getElementById('username').value;
+let p=document.getElementById('password').value;
+if(u && p){
+document.getElementById('message').innerText="Demo login successful!";
+show('dashboard');
+}else{
+document.getElementById('message').innerText="Enter username and password";
+}
 }
 
-function showProgress() {
-  alert("Your learning progress: 35%");
+function register(){
+document.getElementById('message').innerText=
+"Demo registration. Secure database setup is required.";
 }
 
-function showAbout() {
-  alert("SMART ANALYSE - Educational Learning Platform");
-}
-
-function openLesson(name) {
-  document.getElementById("homeSection").style.display = "none";
-  document.getElementById("lessonContent").style.display = "block";
-  document.getElementById("lessonTitle").innerText = name;
-  document.getElementById("lessonText").innerText =
-    "Welcome to " + name + ". This course will help you understand the basic concepts through educational lessons and practice.";
+function changeLang(){
+marathi=!marathi;
+document.getElementById('lang').innerText=
+marathi?"English":"मराठी";
+document.querySelector('.hero h1').innerText=
+marathi?"स्मार्ट अनालिसिस":"SMART ANALYSE";
 }
 </script>
-
 </body>
 </html>
